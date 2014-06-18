@@ -1,0 +1,3 @@
+class KaraokeMachine
+
+end
