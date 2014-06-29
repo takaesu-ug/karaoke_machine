@@ -1,0 +1,32 @@
+注文を付けるとすれば、"|"で分割しているメリットがあまりないので、"|"はスペースと同じような扱いにした方が良いと思います。
+また、split_to_notesメソッドの中でemptyな文字列を除外していますが、こんな風にすれば簡潔に書けます。
+
+A_BAR_REGEXP = /?s|[CDEFGAB]#?/.freeze
+a_bar_melody.scan(A_BAR_REGEXP)
+
+attr_accessorもattr_readerにした方がいいですね。勝手にmelodyを変更されてしまうので。
+
+以上の点を踏まえて僕の方でこんなふうにリファクタリングしてみました。
+良かったら参考にしてください。
+
+class KaraokeMachine
+  ONE_OCTAVE_SCALES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"].freeze
+  A_BAR_REGEXP = /?s|[A-G]#?|?|/.freeze
+
+  attr_reader :melody
+
+  def initialize(melody)
+    @melody = melody
+  end
+
+  def transpose(amount)
+    melody.scan(A_BAR_REGEXP).map {|note|
+      if note =~ / |?|/
+        note
+      else
+        transposed_val = (ONE_OCTAVE_SCALES.index(note) + amount) % ONE_OCTAVE_SCALES.size
+        ONE_OCTAVE_SCALES[transposed_val]
+      end
+    }.join
+  end
+end
