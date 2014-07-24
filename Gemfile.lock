@@ -16,6 +16,12 @@ GEM
     rspec-mocks (3.0.1)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.0)
+    tapp (1.5.0.rc)
+      thor
+    tapp-awesome_print (1.0.0)
+      awesome_print
+      tapp (>= 1.5.0.rc)
+    thor (0.19.1)
 
 PLATFORMS
   ruby
@@ -24,3 +30,4 @@ DEPENDENCIES
   awesome_print
   rake
   rspec
+  tapp-awesome_print

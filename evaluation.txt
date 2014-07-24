@@ -11,7 +11,7 @@ attr_accessorもattr_readerにした方がいいですね。勝手にmelodyを�
 
 class KaraokeMachine
   ONE_OCTAVE_SCALES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"].freeze
-  A_BAR_REGEXP = /?s|[A-G]#?|?|/.freeze
+  A_BAR_REGEXP = /\s|[A-G]#?|\|/.freeze
 
   attr_reader :melody
 
